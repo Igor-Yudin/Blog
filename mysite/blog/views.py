@@ -134,7 +134,7 @@ def shop_edit(request, pk):
 def get_weather_for(city, code):
 	import requests
 	try:
-		r = requests.get(str.format('http://api.openweathermap.org/data/2.5/weather?q={0},{1}&APPID=5935d635f074bcc8ba1d127e1d5243c4', code, city))
+		r = requests.get(str.format('http://api.openweathermap.org/data/2.5/weather?q={1}&APPID=5935d635f074bcc8ba1d127e1d5243c4', code, city))
 		return r.json()['weather'][0]['description']
 	except:
 		return None
@@ -181,7 +181,7 @@ def remember_visit(request):
 		g = GeoIP2()
 		country = g.country(ip)['country_name']
 		country_code = g.country(ip)['country_code']
-		city = g.city(ip)[city]
+		city = g.city(ip)['city']
 
 		weather = None
 		if country and city:
