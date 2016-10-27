@@ -46,8 +46,8 @@ def get_image_path(instance, filename):
 class Shop(models.Model):
 	name = models.CharField(max_length = 200)
 	motto = models.CharField(max_length = 200)
-	advantages_long = models.TextField(default = "")
-	advantages_short = models.TextField(default = "")
+	advantages = models.TextField(default = "")
+	# advantages_short = models.TextField(default = "")
 
 	SUPERWHITE = 'SW'
 	DARKSTYLE = 'DS'
