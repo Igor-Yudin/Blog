@@ -1,0 +1,61 @@
+{% extends 'lp/base.html' %}
+
+{% block content %}
+	<img src = "{{ shop.banner_image.url }}" class = "background-image">
+	<div class = "information">
+		<a href="{% url 'shop_edit' pk=shop.pk %}" style="float: right"><span class="glyphicon glyphicon-pencil">Edit</span></a>
+		<h1>{{ shop.name }}</h1>
+		<p>{{ shop.motto }}</p>
+		<p>{{ shop.advantages | linebreaksbr }}</p>
+		<p>{{ shop.contact_phone }}</p>
+		<p>{{ shop.email }}</p>
+	</div>
+	<div id="overlay">
+		<div>
+			<form method = "POST">{% csrf_token %}
+				<a href="#" onclick="overlay()"><span class="glyphicon glyphicon-remove">Close</span></a>
+				<p>How are you on this {{ visit.weather }} {{ visit.season }} day?</p>
+				<input id="fine" type="radio" name="mood" value="Fine">
+					<label for="fine">I'm fine, thanks!</label>
+				<input id="good" type="radio" name="mood" value="Good">
+					<label for="good">I'm feeling good</label>
+				<input id="normal" type="radio" name="mood" value="Normal">
+					<label for="normal">I'm just normal.</label>
+				<input id="bad" type="radio" name="mood" value="Bad">
+					<label for="bad">Bad...</label>
+			</form>
+		</div>
+	</div>
+	<a href="#" onclick="overlay()"">Click me...</a>
+	<hr>
+	<p>Your comment:</p>
+	<form method="POST">{% csrf_token %}
+		<input id="mood" type="hidden" name="mood" value="">
+		<input type="hidden" name="visit_pk" value="{{ visit.pk }}">
+		<input type="textarea" name="comment" text="">
+		<br>
+		<input type="checkbox" name="result" id="result" unchecked>
+			<label for="result">I'll BUY</label>
+		<br>
+		<button type = "submit" class = "btn btn-default" onclick="setValues()">Send my answer</button>
+	</form>
+
+	<script>
+		function overlay() {
+			el = document.getElementById("overlay");
+			el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+		}
+
+		function setValues() {
+			mood = document.getElementById("mood");
+			var radios = document.getElementsByName('mood');
+			for (i = 0; i < radios.length; i++)
+			{
+				if(radios[i].checked)
+				{
+					mood.value = radios[i].value;
+				}
+			}
+		}
+	</script>
+{% endblock %}

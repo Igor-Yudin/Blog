@@ -1,0 +1,9 @@
+{% extends 'lp/base.html' %}
+
+{% block content %}
+	<h1>New visit</h1>
+	<form method = "POST" class = "visit_form">{% csrf_token %}
+		{{ form.as_p }}
+		<button type = "submit" class = "btn save btn-default">Save</button>
+	</form>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'lp/base.html' %}
+
+{% block content %}
+	{% for shop in shops %}
+		<div class = "shop">
+			<a class = "top-menu" href = "{% url 'shop_remove' pk=shop.pk %}"><span class = "glyphicon glyphicon-remove"></span></a>
+			<a class = "top-menu" href = "{% url 'shop_show' pk=shop.pk %}"><span class = "glyphicon glyphicon-eye-open"></span></a>
+			<h1><a href = "{% url 'shop_edit' pk=shop.pk %}">{{ shop.name }}</a></h1>
+		</div>
+	{% empty %}
+		<p>No shops</p>
+	{% endfor %}
+{% endblock %}

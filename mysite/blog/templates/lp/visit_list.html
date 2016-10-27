@@ -1,0 +1,15 @@
+{% extends 'lp/base.html' %}
+
+{% block content %}
+	{% for visit in visits %}
+		<div class = "visit">
+			<a class = "top-menu" href = "{% url 'visit_remove' pk=visit.pk %}"><span class = "glyphicon glyphicon-remove"></span></a>
+			<div class = "date">
+				created: {{ visit.time_enter }}
+			</div>
+			<h1><a href = "{% url 'visit_edit' pk=visit.pk %}">{{ visit.os }}</a></h1>
+		</div>
+	{% empty %}
+		<p>No visits</p>
+	{% endfor %}
+{% endblock %}
